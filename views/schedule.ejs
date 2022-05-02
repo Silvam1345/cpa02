@@ -1,0 +1,30 @@
+<h1>My Schedule</h1>
+<div class = "d-flex flex wrap text-left overflow-scroll">
+    <% for (course of courses) {%>
+        <div class = "p-3 m-2 border border-primary border-2 bg-light w-25">
+            <a href="/schedule/remove/<%= course._id %>">X</a>
+            <%= course['subject'] %>
+            <%= course.coursenum %>
+            <%= course.term %>
+            <%= "(Section"+" "+course.section+")" %>
+            <br>
+            <strong><%= course.name %></strong>
+            <br>
+            <%=course.instructor[0] %>
+            <%=course.instructor[1] %>
+            (<%=course.instructor[2] %>)
+            <br>
+            <%= "Enrollment: "+course.enrolled+" Limit: "+course.limit+" Waitlist: "+course.waiting %>
+            <br>
+            <hr>
+
+            <%= "Times: "+course.strTimes %>
+        </div>
+        <% }%>
+</div>
+
+<!--
+    <pre>
+        <%= JSON.stringify(courses,null,5) %>
+    </pre>
+-->
