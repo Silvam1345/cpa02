@@ -26,6 +26,7 @@ const Schedule = require('./models/Schedule')
 //  Loading JSON datasets
 // *********************************************************** //
 const courses = require('./public/data/courses20-21.json')
+//const players = require('./public/data/players.json')
 
 
 // *********************************************************** //
@@ -111,6 +112,10 @@ app.get("/", (req, res, next) => {
 
 app.get("/about", (req, res, next) => {
   res.render("about");
+});
+
+app.get("/playerbase", (req, res, next) => {
+  res.render("playerbase");
 });
 
 
