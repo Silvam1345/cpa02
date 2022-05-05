@@ -3,7 +3,44 @@
         font-family:'Courier New', Courier, monospace;
     }
   </style>
-  
+
   <h1>
     NBA Player Search
   </h1>
+  <p class="p-3 m-3 border border-primary bg-light">
+    This app allows the user to search for nba players as of 
+    2022, and can add them to their list of favorite players.
+    Users must signup or login to see players and favorite them.
+</p>
+
+<% if (true || loggedIn) {%> 
+    <form method="post" action="/players/byName" style="margin-bottom: 20px;">
+        Find players by <b>Name:</b>
+        <br>
+       
+          <input type="text" name="first_name" 
+                 placeholder="e.g. James">
+        
+            <input type="text" name="last_name"
+                placeholder="e.g. Harden">
+        <input class="btn btn-primary" type="submit" value="Submit">
+    </form>
+    <br>
+    <form method="post" action="/players/byTeam" style="margin-bottom: 20px;">
+        Find players by <b>Team: </b>
+         
+         <input type="text" name="team" 
+                placeholder="e.g. Lakers">
+         <input class="btn btn-primary" type="submit" value="Submit">
+     </form>
+     <br>
+     <form method="post" action="/players/byPosition" style="margin-bottom: 20px;">
+         Find players by<b> Position: </b> 
+         
+         <input type="text" name="position" 
+                placeholder="e.g. F (Forward)">
+         <input class="btn btn-primary" type="submit" value="Submit">
+     </form>
+     <br>
+     <a href="/favorites/show">Show Favorites</a>
+ <% } %>
