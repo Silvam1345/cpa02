@@ -114,8 +114,38 @@ app.get("/about", (req, res, next) => {
   res.render("about");
 });
 
-app.get("/playerbase", (req, res, next) => {
-  res.render("playerbase");
+
+
+/*
+    Playerbase routes
+*/
+
+app.get('/players', async (req, res, next) => {
+ try{
+   res.locals.players = []
+   res.render('playerbase')
+ }
+ catch (error) {
+   next(error)
+ }
+});
+
+app.post('/players/byName', async (req, res, next) => {
+  const response = 
+  await axios.get('https://www.balldontlie.io/api/v1/players')
+
+  res.locals.players = response.data
+  //res.locals.first_name = req.body.first_name
+  //res.locals.last_name = req.body.last_name
+  res.render("playerlist");
+});
+
+app.post('/players/byTeam', async (req, res, next) => {
+
+});
+
+app.post('/players/byPosition', async (req, res, next) => {
+
 });
 
 
