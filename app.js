@@ -121,6 +121,7 @@ app.get("/about", (req, res, next) => {
 */
 
 app.get("/playerbase", (req, res, next) => {
+   res.locals.players = []
    res.render("playerbase")
 });
 
@@ -128,7 +129,7 @@ app.post('/players/byName', async (req, res, next) => {
   const response = 
   await axios.get('https://www.balldontlie.io/api/v1/players')
 
-  res.locals.players = response.data
+  res.locals.players = response.data.players
   //res.locals.first_name = req.body.first_name
   //res.locals.last_name = req.body.last_name
   res.render("playerlist");

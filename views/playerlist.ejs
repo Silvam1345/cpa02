@@ -11,30 +11,37 @@ Here we want a ul list with the player name, team, position, ht, and wt
             <th>Weight</th>
         </tr>
     </thead>
-    <tbody>
-    <% for (player of players) {
-        %>
-        <tr class="mb-2"> 
-            <td>
-                <a href="/players/show/<%=player._id %>">
-                <%= player['first_name'] %>
-                <%= player['last_name'] %>
-                </a>
-            </td>
-            <td>
-                <strong> <%= player.team['full_name'] %></strong>
-            </td>
-            <td>
-                <%= player.position %>
-            </td>
-            <td>
-                <%= player.height_feet %>
-                <%= player.height_inches %>
-            </td>
-            <td>
-                <%= player.weight_pounds %>
-            </td>
-        </tr>
+    <tbody></tbody>
+    <% if (players==null){%>
+    
+        No players found
+      
+    <% } else  if (players.length>0) { %>
+
+        <% for (player of players) {
+            %>
+            <tr class="mb-2"> 
+                <td>
+                    <a href="/players/show/<%=player._id %>">
+                    <%= player['first_name'] %>
+                    <%= player['last_name'] %>
+                    </a>
+                </td>
+                <td>
+                    <strong> <%= player.team['full_name'] %></strong>
+                </td>
+                <td>
+                    <%= player.position %>
+                </td>
+                <td>
+                    <%= player.height_feet %>
+                    <%= player.height_inches %>
+                </td>
+                <td>
+                    <%= player.weight_pounds %>
+                </td>
+            </tr>
+            <% } %>
         <% } %>
     </tbody>
 </table>
