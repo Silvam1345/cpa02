@@ -120,14 +120,8 @@ app.get("/about", (req, res, next) => {
     Playerbase routes
 */
 
-app.get('/players', async (req, res, next) => {
- try{
-   res.locals.players = []
-   res.render('playerbase')
- }
- catch (error) {
-   next(error)
- }
+app.get("/playerbase", (req, res, next) => {
+   res.render("playerbase")
 });
 
 app.post('/players/byName', async (req, res, next) => {
