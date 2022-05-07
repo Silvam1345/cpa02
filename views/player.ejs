@@ -1,0 +1,29 @@
+<div class="bg-light m-5 p-2 border border-primary border-2">
+    <div class="mb-1">
+        <%= player['id'] %>
+        <%= player['first_name'] %>
+        <%= player['last_name'] %>
+    </div>
+    <div class="mb-1">
+        <%= player['position'] %>
+    </div>
+    <div>
+        <a href="favoritePlayer/<%= player.id %>">(add to favorites)</a></div>
+
+    <div class="mb-1">
+        Height: <%= player.height_feet %>ft, 
+        <%= player.height_inches %>in
+        Weight: <%= player.weight_pounds %> lbs
+        <br>
+        Team: <%= player.team['full_name'] %>
+    </div>
+</div>
+
+<hr>
+
+<pre>
+    <%= JSON.stringify(player,null,5) %>
+</pre>
+-->
+
+        

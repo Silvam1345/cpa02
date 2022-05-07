@@ -144,6 +144,15 @@ app.post('/players/byPosition', async (req, res, next) => {
 
 });
 
+app.get('/players/show/:id', async (req, res, next) => {
+  const response = 
+  await axios.get('https://www.balldontlie.io/api/v1/players/'+req.params.id)
+  
+  res.locals.player = response.data
+  res.render('player')
+
+});
+
 
 
 /*

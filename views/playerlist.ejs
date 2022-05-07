@@ -6,9 +6,9 @@ Here we want a ul list with the player name, team, position, ht, and wt
         <tr>
             <th>Player Name</th>
             <th>Team</th>
-            <th>Position</th>
-            <th>Height</th>
-            <th>Weight</th>
+            <th>Position (Abv)</th>
+            <th>Height (ft, in)</th>
+            <th>Weight (lbs)</th>
         </tr>
     </thead>
     
@@ -22,7 +22,7 @@ Here we want a ul list with the player name, team, position, ht, and wt
             %>
             <tr class="mb-2"> 
                 <td>
-                    <a href="/players/show/<%=player._id %>">
+                    <a href="/players/show/<%= player.id %>">
                     <%= player['first_name'] %>
                     <%= player['last_name'] %>
                     </a>
