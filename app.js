@@ -382,7 +382,7 @@ app.post('/courses/byKey',
 app.use(isLoggedIn)
 
 
-app.get('favoritePlayer/:id', 
+app.get('/favoritePlayer/:id', 
   async (req, res, next) => {
     try {
       const playerId = req.params.id
@@ -398,7 +398,7 @@ app.get('favoritePlayer/:id',
     }
 })
 
-app.get('favorites/show', 
+app.get('/favorites/show', 
   async (req, res, next) => {
     try {
       const players = []
@@ -410,7 +410,7 @@ app.get('favorites/show',
 
       for (i in playerIds) {
         const playerPrf = await axios.get('https://www.balldontlie.io/api/v1/players/'+playerIds[i])
-        players.push(playerPrf)
+        players.push(playerPrf.data)
       }
       res.locals.players = players
       res.render('favorites')
@@ -418,9 +418,15 @@ app.get('favorites/show',
       next(e)
     }
 })
+/*
+app.get('/favorites/show', (req, res, next) => {
+    const players = []
+    res.locals.players = players
+    res.render('favorites')
+  })
+*/
 
-
-app.get('player/remove/:id', 
+app.get('/favorite/remove/:id', 
   async (req, res, next) => {
     try {
       await Favorites.remove(
