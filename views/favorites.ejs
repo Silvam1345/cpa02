@@ -1,0 +1,21 @@
+<h1>My Favorites</h1>
+<div class = "d-flex flex wrap text-left overflow-scroll">
+    <% for (player of players) {%>
+        <div class = "p-3 m-2 border border-primary border-2 bg-light w-25">
+            <a href="/favorite/remove/<%= player.id %>">Remove</a>
+            <%= player['id'] %>
+            <br>
+            <%= player['first_name'] %>
+            <%= player['last_name'] %>
+            <br>
+            <%= player.team['abbreviation'] %>
+
+        </div>
+    <% }%>
+</div>
+
+<!--
+    <pre>
+        <%= JSON.stringify(players,null,5) %>
+    </pre>
+-->

@@ -134,32 +134,22 @@ app.post('/players/byName', async (req, res, next) => {
   //res.locals.last_name = req.body.last_name
   res.render("playerlist");
 });
-/*
-app.post('/players/byTeam', async (req, res, next) => {
-  const {team_name} = req.body;
-  const player_list = 
-  await axios.get('https://www.balldontlie.io/api/v1/players')
-  const players = Player.find({name: team_name})
-  res.locals.players = players
-  res.render('playerlist')
 
-});
-*/
 app.post('/players/byId', async (req,res, next) => {
   const response = 
   await axios.get('https://www.balldontlie.io/api/v1/players/'+req.body.id)
   res.locals.player = response.data
   res.render('player')
 })
-/*
-app.post('/players/byPosition', async (req, res, next) => {
-  const position = req.body;
-  const players = Player.find({position: position})
-  res.locals.players = players
+
+app.post('/players/byLetter', async (req, res, next) => {
+  const response =
+  await axios.get('https://www.balldontlie.io/api/v1/players/?search='+req.body.letter)
+  res.locals.players = response.data.data
   res.render('playerlist')
 
 });
-*/
+
 app.get('/players/show/:id', async (req, res, next) => {
   const response = 
   await axios.get('https://www.balldontlie.io/api/v1/players/'+req.params.id)
@@ -407,8 +397,6 @@ app.get('favoritePlayer/:id',
       next(e)
     }
 })
-
-
 
 app.get('favorites/show', 
   async (req, res, next) => {

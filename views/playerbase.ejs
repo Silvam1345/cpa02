@@ -8,9 +8,10 @@
     NBA Player Search
   </h1>
   <p class="p-3 m-3 border border-primary bg-light">
-    This app allows the user to search for nba players as of 
-    2022, and can add them to their list of favorite players.
-    Users must signup or login favorite players.
+    This app allows the user to search for all registered nba 
+    players as of 2022, and can add them to their list of 
+    favorite players. Users must signup or login to favorite 
+    players and view their favorites list.
 </p>
 
 <% if (true || loggedIn) {%> 
@@ -32,11 +33,11 @@
          <input class="btn btn-primary" type="submit" value="Submit">
      </form>
      <br>
-     <form method="post" action="/players/byPosition" style="margin-bottom: 20px;">
-         Find players by<b> Position: </b> 
+     <form method="post" action="/players/byLetter" style="margin-bottom: 20px;">
+         Find players by<b> Letter: </b> 
          
-         <input type="text" name="position" 
-                placeholder="e.g. F (Forward)">
+         <input type="text" name="letter" 
+                placeholder="e.g. F">
          <input class="btn btn-primary" type="submit" value="Submit">
      </form>
      <br>
