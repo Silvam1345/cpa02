@@ -21,12 +21,13 @@ const axios = require("axios")
 const ToDoItem = require("./models/ToDoItem")
 const Course = require('./models/Course')
 const Schedule = require('./models/Schedule')
+//const Player = require('./models/Player')
 
 // *********************************************************** //
 //  Loading JSON datasets
 // *********************************************************** //
 const courses = require('./public/data/courses20-21.json')
-//const players = require('./public/data/players.json')
+//const players = await axios.get('https://www.balldontlie.io/api/v1/players')
 
 
 // *********************************************************** //
@@ -127,23 +128,38 @@ app.get("/playerbase", (req, res, next) => {
 
 app.post('/players/byName', async (req, res, next) => {
   const response = 
-  await axios.get('https://www.balldontlie.io/api/v1/players/?search='+req.body.first_name)
-
+  await axios.get('https://www.balldontlie.io/api/v1/players/?search='+req.body.name)
   res.locals.players = response.data.data
-  res.locals.first_name = req.body.first_name
+  //res.locals.name = req.body.name
   //res.locals.last_name = req.body.last_name
   res.render("playerlist");
 });
-
+/*
 app.post('/players/byTeam', async (req, res, next) => {
+  const {team_name} = req.body;
+  const player_list = 
+  await axios.get('https://www.balldontlie.io/api/v1/players')
+  const players = Player.find({name: team_name})
+  res.locals.players = players
+  res.render('playerlist')
+
+});
+*/
+app.post('/players/byId', async (req,res, next) => {
   const response = 
-  await axios.get('https://www.balldontlie.io/api/v1/players/?search=')
-});
-
+  await axios.get('https://www.balldontlie.io/api/v1/players/'+req.body.id)
+  res.locals.player = response.data
+  res.render('player')
+})
+/*
 app.post('/players/byPosition', async (req, res, next) => {
+  const position = req.body;
+  const players = Player.find({position: position})
+  res.locals.players = players
+  res.render('playerlist')
 
 });
-
+*/
 app.get('/players/show/:id', async (req, res, next) => {
   const response = 
   await axios.get('https://www.balldontlie.io/api/v1/players/'+req.params.id)
@@ -375,6 +391,60 @@ app.post('/courses/byKey',
 
 app.use(isLoggedIn)
 
+
+app.get('favoritePlayer/:id', 
+  async (req, res, next) => {
+    try {
+      const playerId = req.params.id
+      const userId = res.locals.user._id
+      const lookup = await Favorites.find({playerId,userId})
+      if (lookup.length==0) {
+        const favorites = new Favorites({playerId,userId})
+        await favorites.save()
+      }
+      res.redirect('/favorites/show')
+    } catch(e) {
+      next(e)
+    }
+})
+
+
+
+app.get('favorites/show', 
+  async (req, res, next) => {
+    try {
+      const players = []
+      const userId = res.locals.user._id
+      const playerIds = 
+        (await Favorites.find({userId}))
+                        .sort(x => x.first_name)
+                        .map(x => x.playerId)
+
+      for (i in playerIds) {
+        const playerPrf = await axios.get('https://www.balldontlie.io/api/v1/players/'+playerIds[i])
+        players.push(playerPrf)
+      }
+      res.locals.players = players
+      res.render('favorites')
+    } catch(e) {
+      next(e)
+    }
+})
+
+
+app.get('player/remove/:id', 
+  async (req, res, next) => {
+    try {
+      await Favorites.remove(
+                  {userId: res.locals.user._id,
+                  playerId: req.params.id})
+      res.redirect('/favorites/show')
+      
+    } catch(e) {
+      next(e)
+    }
+  })
+
 app.get('/addCourse/:courseId',
   // add a course to the user's schedule
   async (req,res,next) => {
@@ -452,6 +522,7 @@ app.set("port", port);
 
 // and now we startup the server listening on that port
 const http = require("http");
+const Favorites = require("./models/Favorites");
 const server = http.createServer(app);
 
 server.listen(port);
