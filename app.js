@@ -121,27 +121,34 @@ app.get("/about", (req, res, next) => {
     Playerbase routes
 */
 
+//renders the main page
 app.get("/playerbase", (req, res, next) => {
    res.locals.players = []
    res.render("playerbase")
 });
 
+//returns the first 25 players with the inputted name as a first or last name
 app.post('/players/byName', async (req, res, next) => {
   const response = 
   await axios.get('https://www.balldontlie.io/api/v1/players/?search='+req.body.name)
   res.locals.players = response.data.data
-  //res.locals.name = req.body.name
-  //res.locals.last_name = req.body.last_name
   res.render("playerlist");
 });
 
-app.post('/players/byId', async (req,res, next) => {
-  const response = 
-  await axios.get('https://www.balldontlie.io/api/v1/players/'+req.body.id)
-  res.locals.player = response.data
-  res.render('player')
+//returns a player profile with the inputted id number (if exists)
+app.post('/players/byId', 
+  async (req,res, next) => {
+    try{
+      const response = 
+      await axios.get('https://www.balldontlie.io/api/v1/players/'+req.body.id)
+      res.locals.player = response.data
+      res.render('player')
+    } catch(e){
+      next(e);
+    }
 })
 
+//returns the first 25 players with the inputted letter in their name
 app.post('/players/byLetter', async (req, res, next) => {
   const response =
   await axios.get('https://www.balldontlie.io/api/v1/players/?search='+req.body.letter)
@@ -150,6 +157,7 @@ app.post('/players/byLetter', async (req, res, next) => {
 
 });
 
+//shows a player's full information 
 app.get('/players/show/:id', async (req, res, next) => {
   const response = 
   await axios.get('https://www.balldontlie.io/api/v1/players/'+req.params.id)
@@ -158,8 +166,6 @@ app.get('/players/show/:id', async (req, res, next) => {
   res.render('player')
 
 });
-
-
 
 /*
     ToDoList routes
@@ -354,7 +360,7 @@ app.post('/courses/byInst',
     res.render('courselist')
   }
 )
-//Lucian Did byKey function
+
 app.post('/courses/byKey',
   // show courses taught by a faculty send from a form
   async (req,res,next) => {
@@ -381,7 +387,7 @@ app.post('/courses/byKey',
 
 app.use(isLoggedIn)
 
-
+//gets the player's id and adds it to a list of favorites 
 app.get('/favoritePlayer/:id', 
   async (req, res, next) => {
     try {
@@ -398,6 +404,7 @@ app.get('/favoritePlayer/:id',
     }
 })
 
+//lists the user's favorite players 
 app.get('/favorites/show', 
   async (req, res, next) => {
     try {
@@ -418,14 +425,8 @@ app.get('/favorites/show',
       next(e)
     }
 })
-/*
-app.get('/favorites/show', (req, res, next) => {
-    const players = []
-    res.locals.players = players
-    res.render('favorites')
-  })
-*/
 
+//removes a player from the user's favorites list
 app.get('/favorite/remove/:id', 
   async (req, res, next) => {
     try {
