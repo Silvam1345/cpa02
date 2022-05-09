@@ -7,15 +7,19 @@ as of the year 2022, as well as create a list of favorite players.
 ## Using the App
 On the main page, the user can search for players by either their first 
 or last name, their id number, or by letter. 
-[Main_page](public/images/Screen Shot 2022-05-08 at 9.08.20 PM.png)
+
+![Main_page](public/images/Screen Shot 2022-05-08 at 9.08.20 PM.png)
 
 From there, they can click on the player's name to get the page of the player's info.
-[List_of_players](public/images/Screen Shot 2022-05-08 at 9.08.31 PM.png)
-[Player's_page](public/images/Screen Shot 2022-05-08 at 9.08.59 PM.png)
+
+![List_of_players](public/images/Screen Shot 2022-05-08 at 9.08.31 PM.png)
+
+![Player's_page](public/images/Screen Shot 2022-05-08 at 9.08.59 PM.png)
 
 Users must be signed in or logged in to add the player to their list of favorite players.
 These players can also be removed from the list. 
-[Favorites_Page](public/images/Screen Shot 2022-05-08 at 9.09.22 PM.png)
+
+![Favorites_Page](public/images/Screen Shot 2022-05-08 at 9.09.22 PM.png)
 
 ## Installation
 Download the project from github and download nodejs and npm from https://nodejs.org
