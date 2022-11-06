@@ -1,46 +1,53 @@
-<h1>Players found</h1>
-<hr>
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Player Name</th>
-            <th>Team</th>
-            <th>Position (Abv)</th>
-            <th>Height (ft, in)</th>
-            <th>Weight (lbs)</th>
-        </tr>
-    </thead>
-    
-    <% if (players==null){%>
-    
-        No players found
-      
-    <% } else  if (players.length>0) { %>
-
-        <% for (player of players) {
-            %>
-            <tr class="mb-2"> 
-                <td>
-                    <a href="/players/show/<%= player.id %>">
-                    <%= player['first_name'] %>
-                    <%= player['last_name'] %>
-                    </a>
-                </td>
-                <td>
-                    <strong> <%= player.team['full_name'] %></strong>
-                </td>
-                <td>
-                    <%= player.position %>
-                </td>
-                <td>
-                    <%= player.height_feet %>
-                    <%= player.height_inches %>
-                </td>
-                <td>
-                    <%= player.weight_pounds %>
-                </td>
+<style>
+    body{
+        font-family:'Courier New', Courier, monospace;
+    }
+  </style>
+<body>
+    <h1>Players found</h1>
+    <hr>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Player Name</th>
+                <th>Team</th>
+                <th>Position (Abv)</th>
+                <th>Height (ft, in)</th>
+                <th>Weight (lbs)</th>
             </tr>
+        </thead>
+        
+        <% if (players==null || players.length==0) {%>
+        
+            No players found
+        
+        <% } else  if (players.length>0) { %>
+
+            <% for (player of players) {
+                %>
+                <tr class="mb-2"> 
+                    <td>
+                        <a href="/players/show/<%= player.id %>">
+                        <%= player['first_name'] %>
+                        <%= player['last_name'] %>
+                        </a>
+                    </td>
+                    <td>
+                        <strong> <%= player.team['full_name'] %></strong>
+                    </td>
+                    <td>
+                        <%= player.position %>
+                    </td>
+                    <td>
+                        <%= player.height_feet %>
+                        <%= player.height_inches %>
+                    </td>
+                    <td>
+                        <%= player.weight_pounds %>
+                    </td>
+                </tr>
+                <% } %>
             <% } %>
-        <% } %>
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</body>

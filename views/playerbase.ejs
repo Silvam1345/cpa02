@@ -2,12 +2,18 @@
     body{
         font-family:'Courier New', Courier, monospace;
     }
+
+    form {
+        text-align: center;
+        margin: 50px;
+    }
+
   </style>
 
-  <h1>
+  <h1 style="text-align: center; margin: 1em;">
     NBA Player Search
   </h1>
-  <p class="p-3 m-3 border border-primary bg-light">
+  <p class="p-3 m-3 border border-light rounded bg-secondary">
     This app allows the user to search for all registered nba 
     players as of 2022, and can add them to their list of 
     favorite players. Users must signup or login to favorite 
@@ -16,29 +22,30 @@
 
 <% if (true || loggedIn) {%> 
     <form method="post" action="/players/byName" style="margin-bottom: 20px;">
-        Find players by <b>Name (first or last name only):</b>
+        Find players by <b>Name (first and/or last name):</b>
         <br>
        
           <input type="text" name="name" 
                  placeholder="e.g. James">
  
-        <input class="btn btn-primary" type="submit" value="Submit">
+        <input class="btn btn-secondary" type="submit" value="Submit">
     </form>
     <br>
     <form method="post" action="/players/byId" style="margin-bottom: 20px;">
         Find players by <b>ID Number: </b>
+        <br>
          
          <input type="text" name="id" 
                 placeholder="e.g. 237">
-         <input class="btn btn-primary" type="submit" value="Submit">
+         <input class="btn btn-secondary" type="submit" value="Submit">
      </form>
      <br>
      <form method="post" action="/players/byLetter" style="margin-bottom: 20px;">
          Find players by<b> Letter: </b> 
-         
+         <br>
          <input type="text" name="letter" 
                 placeholder="e.g. F">
-         <input class="btn btn-primary" type="submit" value="Submit">
+         <input class="btn btn-secondary" type="submit" value="Submit">
      </form>
      <br>
      <a href="/favorites/show">Show Favorites</a>
