@@ -1,24 +1,30 @@
-<div class="bg-light m-5 p-2 border border-primary border-2">
-    <div class="mb-1">
-        Player ID: <%= player['id'] %>
-        <br>
-        <%= player['first_name'] %>
-        <%= player['last_name'] %>
+<style>
+    body{
+        font-family:'Courier New', Courier, monospace;
+    }
+  </style>
+<body>
+    <div class="bg-light m-5 p-2 border border-secondary border-2 bg-secondary">
+        <div class="mb-1">
+            Player ID: <%= player['id'] %>
+            <br>
+            <%= player['first_name'] %>
+            <%= player['last_name'] %>
+        </div>
+        <div class="mb-1">
+            Position: <%= player['position'] %>
+        </div>
+        <div class="mb-1">
+            Height: <%= player.height_feet %>ft, 
+            <%= player.height_inches %>in
+            Weight: <%= player.weight_pounds %> lbs
+            <br>
+            Team: <%= player.team['full_name'] %>
+        </div>
+        <div>
+            <a href="/favoritePlayer/<%= player.id %>">(add to favorites)</a></div>
     </div>
-    <div class="mb-1">
-        Position: <%= player['position'] %>
-    </div>
-    <div class="mb-1">
-        Height: <%= player.height_feet %>ft, 
-        <%= player.height_inches %>in
-        Weight: <%= player.weight_pounds %> lbs
-        <br>
-        Team: <%= player.team['full_name'] %>
-    </div>
-    <div>
-        <a href="/favoritePlayer/<%= player.id %>">(add to favorites)</a></div>
-</div>
-
+</body>
 <hr>
 
 <pre>

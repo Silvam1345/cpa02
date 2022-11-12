@@ -3,17 +3,21 @@
     body{
         font-family:'Courier New', Courier, monospace;
     }
+
+    form {
+        text-align: center;
+        margin: 50px;
+    }
 </style>
 
     <div class="jumbotron">
-        <h1>PA03: Course Finder Fall20-Spr21 </h1>
+        <h1 style="text-align: center; margin: 1em;">Course Finder: Fall20-Spr21 </h1>
         <p></p>
     </div>
 
-    <p class="p-3 m-3 border border-primary bg-light">
-        The goal of this assignment is to write an app that will let
-        students pick their courses for the year. Since we don't have 
-        the data for this year (due to workday issues), we will use the 
+    <p class="p-3 m-3 border border-secondary bg-secondary">
+        This is an app that will let
+        users pick Brandeis courses for the year. This will use only the 
         2020-2021 Academic year data. You must signup or login to see
         the courses and create your schedule.
     </p>
@@ -21,26 +25,29 @@
     <% if (true || loggedIn) {%>  
         <form method="post" action="/courses/bySubject" style="margin-bottom: 20px;">
             Show Courses by <b>Subject:</b>
-             <!-- Code above added by David Pollack (bold) -->
+            <br>
+             
               <input type="text" name="subject" 
                      placeholder="e.g. COSI">
-            <input class="btn btn-primary" type="submit" value="Submit">
+            <input class="btn btn-secondary" type="submit" value="Submit">
         </form>
         <br>
         <form method="post" action="/courses/byInst" style="margin-bottom: 20px;">
            Show Courses by Instructor  <b>Email: </b>
-            <!-- Code above added by David Pollack (bold) -->
+           <br>
+            
             <input type="text" name="email" 
                    placeholder="e.g. tjhickey">
-            <input class="btn btn-primary" type="submit" value="Submit">
+            <input class="btn btn-secondary" type="submit" value="Submit">
         </form>
         <br>
         <form method="post" action="/courses/byKey" style="margin-bottom: 20px;">
-            Show courses by<b> Keyword</b> 
-            <!-- Code above added by David Pollack (bold) -->
+            Show courses by<b> Keyword</b>
+            <br>
+            
             <input type="text" name="keyword" 
                    placeholder="e.g. diversity">
-            <input class="btn btn-primary" type="submit" value="Submit">
+            <input class="btn btn-secondary" type="submit" value="Submit">
         </form>
         <br>
         <a href="/schedule/show">Show Schedule</a>
