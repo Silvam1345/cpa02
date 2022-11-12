@@ -35,8 +35,7 @@ const courses = require('./public/data/courses20-21.json')
 // *********************************************************** //
 
 const mongoose = require( 'mongoose' );
-//const mongodb_URI = process.env.mongodb_URI
-const mongodb_URI = 'mongodb+srv://cs_sj:BrandeisSpr22@cluster0.kgugl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+const mongodb_URI = process.env.mongodb_URI
 
 
 mongoose.connect( mongodb_URI, { useNewUrlParser: true, useUnifiedTopology: true } );
@@ -116,24 +115,14 @@ app.get("/about", (req, res, next) => {
   res.render("about");
 });
 
-
-
-/*
-    Playerbase routes
-*/
-
-//renders the main page
-/*
-app.get("/playerbase", (req, res, next) => {
-   res.locals.players = []
-   res.render("playerbase")
+app.get("/coursefinder", (req, res, next) => {
+  res.render("coursefinder");
 });
-*/
 
 //returns the first 25 players with the inputted name as a first or last name
 app.post('/players/byName', async (req, res, next) => {
   const response = 
-  await axios.get('https://www.balldontlie.io/api/v1/players/?search='+req.body.name)
+  await axios.get('https://www.balldontlie.io/api/v1/players/?_per_page=100&_page=0&api_key=DEMO_KEY&search='+req.body.name)
   res.locals.players = response.data.data
   res.render("playerlist");
 });
@@ -154,7 +143,7 @@ app.post('/players/byId',
 //returns the first 25 players with the inputted letter in their name
 app.post('/players/byLetter', async (req, res, next) => {
   const response =
-  await axios.get('https://www.balldontlie.io/api/v1/players/?search='+req.body.letter)
+  await axios.get('https://www.balldontlie.io/api/v1/players/?_per_page=100&_page=0&api_key=DEMO_KEY&search='+req.body.letter)
   res.locals.players = response.data.data
   res.render('playerlist')
 
