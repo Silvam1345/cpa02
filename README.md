@@ -4,6 +4,8 @@ This is an app which allows the user to create an account
 to view an api database of all registered players in the NBA 
 as of the year 2022, as well as create a list of favorite players.
 
+Link to the site on Railway: https://nba-search-app.up.railway.app/
+
 ## Using the App
 On the main page, the user can search for players by either their first 
 or last name, their id number, or by letter. 
